@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     "meme_analyzer",
     "rest_framework",
     'corsheaders',
-]
+]   
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
