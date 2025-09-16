@@ -1,10 +1,11 @@
-# meme_analyzer/ml/model.py
 import json
 import os
-from torch.utils.data import Dataset
-from PIL import Image
+import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from torch.utils.data import Dataset
+from PIL import Image
+
 
 class MemeDataset(Dataset):
     def __init__(self, jsonl_file, img_dir, transform=None):
@@ -17,12 +18,13 @@ class MemeDataset(Dataset):
 
     def __getitem__(self, idx):
         item = self.items[idx]
-        img_path = os.path.join(self.img_dir, item['file_name'])
+        img_path = os.path.join(self.img_dir, item['img'])
         image = Image.open(img_path).convert('RGB')
-        label = item['label']  # map to int outside if needed
+        label = item['label']
         if self.transform:
             image = self.transform(image)
         return image, label
+
 
 class MemeClassifierNet(nn.Module):
     def __init__(self, num_classes):
@@ -32,7 +34,14 @@ class MemeClassifierNet(nn.Module):
             nn.ReLU(),
             nn.Flatten()
         )
-        self.classifier = nn.Linear(54080, num_classes)
+
+        # Dynamically calculate the flattened feature size
+        with torch.no_grad():
+            dummy_input = torch.zeros(1, 3, 128, 128)  # same as input image size
+            dummy_output = self.features(dummy_input)
+            n_features = dummy_output.shape[1]
+
+        self.classifier = nn.Linear(n_features, num_classes)
 
     def forward(self, x):
         x = self.features(x)

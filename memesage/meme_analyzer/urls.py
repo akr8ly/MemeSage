@@ -1,6 +1,8 @@
 from django.urls import path
-from .views import MemeSageView
+from .views import home, MemeSageView
 
 urlpatterns = [
-    path('', MemeSageView.as_view(), name='memesage-root'),
+    path('', home, name='home'),
+    path('api/meme/', MemeSageView.as_view()),  
 ]
+
