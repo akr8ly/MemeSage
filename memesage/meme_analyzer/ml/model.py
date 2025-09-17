@@ -37,7 +37,7 @@ class MemeClassifierNet(nn.Module):
 
         # Dynamically calculate the flattened feature size
         with torch.no_grad():
-            dummy_input = torch.zeros(1, 3, 128, 128)  # same as input image size
+            dummy_input = torch.zeros(1, 3, 128, 128) 
             dummy_output = self.features(dummy_input)
             n_features = dummy_output.shape[1]
 

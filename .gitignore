@@ -1,1 +1,4 @@
 /memesage/meme_analyzer/datasets
+/memesage/.env
+/memesage/meme_analyzer/ml/
+

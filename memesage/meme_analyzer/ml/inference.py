@@ -31,7 +31,7 @@ def predict(img_path, model):
     return pred
 
 # Example usage:
-result = predict('memesage/meme_analyzer/datasets/data/img/01235.png', model)
+result = predict('memesage/meme_analyzer/datasets/data/img/01269.png', model)
 
 # Define label-to-class map (adjust according to your dataset)
 label_map = {
