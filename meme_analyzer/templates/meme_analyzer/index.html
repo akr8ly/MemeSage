@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% csrf_token %}
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MemeSage - AI-Powered Meme Analysis</title>
+    <link rel="stylesheet" href="{% static 'meme_analyzer/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <!-- Your logo SVG or text here -->
+            <div class="header-text">
+                <h1>MemeSage</h1>
+                <p>AI-Powered Meme Analysis</p>
+            </div>
+        </div>
+        <div class="header-right">
+            <a href="#" class="neural-link">Neural Meme Analysis</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="hero">
+            <h1 class="hero-title">Decode the Humor</h1>
+            <p class="hero-subtitle">
+                Upload any meme and let our AI analyze its text, sentiment, and cultural impact.
+                Discover the deeper meaning behind internet humor.
+            </p>
+        </div>
+
+        <div class="upload-container">
+            <label for="file-upload" class="upload-area">
+                <div class="upload-icon">
+                    <!-- SVG Upload icon -->
+                </div>
+                <h3>Upload Meme Image</h3>
+                <p>Drag & drop your meme here, or click to browse</p>
+                <input type="file" id="file-upload" accept="image/jpeg, image/png, image/gif, image/webp" hidden />
+                <div class="browse-button">Browse Files</div>
+            </label>
+            <!-- Tag area inside upload box -->
+             
+            <div id="tags-list" class="tag-list" style="margin-top: 1rem;"></div>
+            <p class="upload-support">Supports JPEG, PNG, GIF, WebP • Max 10MB</p>
+        </div>
+
+        <div class="browse-button" style="margin-top: 1.5rem; text-align:center;">
+            Extracted Text
+        </div>
+        <div id="ocr-result" class="ocr-result" style="white-space: pre-wrap;"></div>
+    </main>
+
+    <script src="{% static 'meme_analyzer/script.js' %}"></script>
+</body>
+</html>
